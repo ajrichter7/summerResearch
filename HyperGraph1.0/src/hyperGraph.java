@@ -25,6 +25,7 @@ public class hyperGraph {
 		for (hyperNode i : nodes) {
 			System.out.println(i.getId());
 		}
+		System.out.println();
 	}
 	
 	//method to print out ALL of the edges in the graph 
@@ -44,6 +45,17 @@ public class hyperGraph {
 			}
 			System.out.println();
 		}
+	}
+	
+	//method to print out edge objects in the class 
+	//		format
+	//	-------------
+	//Edge # : hyperEdge@memorylocation
+	public void printhyperEdgeObjects() {
+		for (int i = 0; i < edges.size(); i++) {
+			System.out.println("Edge " + i + " : " + edges.get(i));
+		}
+		System.out.println();
 	}
 	
 	//method to print out the edges leaving a specific hyperNode (ie will print out all the hyperEdges where node c tail)
@@ -270,11 +282,9 @@ public class hyperGraph {
 		System.out.println("graph.getOutgoingEdges() function output: " + out);
 		System.out.println();
 		
-		
-		System.out.println();
 		graph.printEdges(); 
+		graph.printhyperEdgeObjects(); 
 		graph.printNodes();
-
 		
 	}
 	
