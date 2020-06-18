@@ -155,15 +155,15 @@ public class hyperGraph {
 		edge0.setTail(tail);
 		edges.add(edge0); 
 		
-		HashSet<hyperNode> tail1 = new HashSet<hyperNode>(); 
+		tail = new HashSet<hyperNode>(); 
 		HashSet<hyperNode> head1 = new HashSet<hyperNode>();
 		
-		tail1.add(nodes.get(0));
-		tail1.add(nodes.get(1));
+		tail.add(nodes.get(0));
+		tail.add(nodes.get(1));
 		head1.add(nodes.get(3));
 		hyperEdge edge1 = new hyperEdge();
 		edge1.setHead(head1);
-		edge1.setTail(tail1);
+		edge1.setTail(tail);
 		edges.add(edge1); 
 
 		HashSet<hyperNode> tail2 = new HashSet<hyperNode>(); 
@@ -263,6 +263,23 @@ public class hyperGraph {
 		edge10.setHead(head10);
 		edge10.setTail(tail10);
 		edges.add(edge10); 
+	}
+	
+	public void addhyperEdge(HashSet<hyperNode> tail, HashSet<hyperNode> head){
+		hyperEdge edge = new hyperEdge();
+		edge.setHead(head);
+		edge.setTail(tail);
+		edges.add(edge); 
+		for (hyperNode i : tail) {
+			if (!nodes.contains(i)) {
+				nodes.add(i);
+			}
+		}
+		for (hyperNode i : head) {
+			if (!nodes.contains(i)) {
+				nodes.add(i);
+			}
+		}
 	}
 
 	//main method 

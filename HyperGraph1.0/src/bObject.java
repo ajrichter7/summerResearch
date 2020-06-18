@@ -63,7 +63,8 @@ public class bObject extends hyperGraph {
 		HashSet<hyperEdge> X = new HashSet<hyperEdge>(); 
 		
 		//Q <- want a queue of hyperNodes to traverse in the graph which comes from HashSet<String> lsofNodes
-		Queue<hyperNode> Q = new LinkedList<>(); 
+		Queue<hyperNode> Q = new LinkedList<hyperNode>(); 
+		//test queue methods to see if get error
 		
 		boolean empty = Q.isEmpty();
 		while(!empty) {
