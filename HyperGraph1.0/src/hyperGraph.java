@@ -279,6 +279,33 @@ public class hyperGraph {
 		graph.printhyperEdgeObjects(); 
 		graph.printNodes();
 		
+		HashSet<hyperNode> n = new HashSet<hyperNode>(); 
+		
+		for (int i = 0 ; i <2; i ++) {
+			hyperNode j = graph.nodes.get(i); 
+			n.add(j); 
+		}
+		bObject x = new bObject(); 
+		
+		x = hyperAlgorithms.bVisit(graph, n); 
+		
+		System.out.println("B Set: ");
+		for (hyperNode i : x.getBset()) {
+			System.out.println(i.getId());
+		}
+		System.out.println();
+		System.out.println("X Set: ");
+		for(hyperEdge e : x.getXset()) {
+			e.printHyperEdge();
+		}
+		System.out.println();
+		System.out.println("R Set: ");
+		for(hyperEdge e: x.getRset()) {
+			e.printHyperEdge();
+		}
+		
+	
+		
 	}
 	
 }
