@@ -1,47 +1,47 @@
 import java.util.*;
 
-public class bObject extends hyperGraph {
+public class bObject {
 	//B is the set of B-connected nodes given a Source set S 
-	protected ArrayList<hyperNode> B;
+	protected HashSet<hyperNode> B;
 	//R is the list of restricted hyperEdges (hyperEdges that can be reached but not traversed) 
-	protected ArrayList<hyperEdge> R;
+	protected HashSet<hyperEdge> R;
 	//X is the list of traversed hyperEdges 
-	protected ArrayList<hyperEdge> X; 
+	protected HashSet<hyperEdge> X; 
 	
 	//constructor for object to return after bVisit
 	public bObject() {
-		ArrayList<hyperNode> B = new ArrayList<hyperNode>(); 
-		ArrayList<hyperEdge> R = new ArrayList<hyperEdge>(); 
-		ArrayList<hyperEdge> X = new ArrayList<hyperEdge>(); 
+		HashSet<hyperNode> B = new HashSet<hyperNode>(); 
+		HashSet<hyperEdge> R = new HashSet<hyperEdge>(); 
+		HashSet<hyperEdge> X = new HashSet<hyperEdge>(); 
 	}
 	
 	//method to set list of B-connected nodes
-	public void setB(ArrayList<hyperNode> b) {
+	public void setB(HashSet<hyperNode> b) {
 		this.B = b; 
 	}
 	
 	//method to set list of hyperEdges reached but not traversed (restricted) 
-	public void setR(ArrayList<hyperEdge> r) {
+	public void setR(HashSet<hyperEdge> r) {
 		this.R = r; 
 	}
 	
 	//method to set list of traversed hyperEdges 
-	public void setX(ArrayList<hyperEdge> x) {
+	public void setX(HashSet<hyperEdge> x) {
 		this.X = x; 
 	}
 	
 	//method to return list of B-connected nodes 
-	public ArrayList<hyperNode> getBset(){
+	public HashSet<hyperNode> getBset(){
 		return this.B; 
 	}
 	
 	//method to return list of restricted hyperEdges 
-	public ArrayList<hyperEdge> getRset(){
+	public HashSet<hyperEdge> getRset(){
 		return this.R; 
 	}
 	
 	//method to return list of traversed hyperEdges
-	public ArrayList<hyperEdge> getXset(){
+	public HashSet<hyperEdge> getXset(){
 		return this.X; 
 	}	
 	

@@ -43,6 +43,16 @@ public class hyperEdge {
 		this.head.add(node); 
 	}
 	
+	//method to return the size of the tail set 
+	public int tailSize() {
+		return this.tail.size(); 
+	}
+	
+	//method to return the size of the head set 
+	public int headSize() {
+		return this.head.size(); 
+	}
+	
 	//method to print out specific hyperEdge that method is called on 
 	public void printHyperEdge() {
 		System.out.println(this);
