@@ -1,14 +1,13 @@
 import java.util.ArrayList;
 
-public class hyperNode extends hyperGraph{
+public class hyperNode {
 	String Id; 
 	ArrayList<String> attributes; 
 	
 	//constructor for hyperNode 
-	public hyperNode(hyperGraph graph, String Id) {
+	public hyperNode(String Id) {
 		this.Id = Id;
 		attributes = new ArrayList<String>(); 
-		graph.nodes.add(this); 
 	}
 	
 	//method to get the unique String Id associated with each hyperNode 
