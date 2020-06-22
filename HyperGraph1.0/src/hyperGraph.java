@@ -15,7 +15,7 @@ public class hyperGraph {
 		return nodes; 
 	}
 	
-	//methog to get the list of hyperEdges in the hyperGraph
+	//method to get the list of hyperEdges in the hyperGraph
 	public ArrayList<hyperEdge> getEdges(){
 		return edges; 
 	}
@@ -137,8 +137,6 @@ public class hyperGraph {
 	}
 	
 	//method to build the hyperGraph outlined in Figure 8.
-	//Note, I need to work on this to figure out how to make it using a loop. Also, I am not using the addhyperEdge function 
-	//at all in the code so far. I should make sure it works, if it doesn't fix it and then use that in later issues. 
 	public void buildhyperGraph() {
 		List<String> ls = List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R");
 		for (String i : ls) {
@@ -285,9 +283,8 @@ public class hyperGraph {
 			hyperNode j = graph.nodes.get(i); 
 			n.add(j); 
 		}
-		bObject x = new bObject(); 
 		
-		x = hyperAlgorithms.bVisit(graph, n); 
+		bObject x = hyperAlgorithms.bVisit(graph, n); 
 		
 		System.out.println("B Set: ");
 		for (hyperNode i : x.getBset()) {
@@ -304,7 +301,15 @@ public class hyperGraph {
 			e.printHyperEdge();
 		}
 		
-	
+		System.out.println();
+		System.out.println("bRelaxation distances ------------------");
+		System.out.println();
+		Hashtable<hyperNode, Integer>dist = hyperAlgorithms.bRelaxation(graph,n);
+		
+		Set<hyperNode> nodes = dist.keySet();
+		for (hyperNode nee : nodes) {
+			System.out.println(nee.getId() + " : " + dist.get(nee));
+		}
 		
 	}
 	
