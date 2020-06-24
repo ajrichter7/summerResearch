@@ -108,8 +108,7 @@ public class hyperAlgorithms {
 		HashSet<hyperEdge> kRset = new HashSet<hyperEdge>(); 
 		
 		//while there exists an edge that we have not seen do 
-		//TODO: make a separate function for while loop to include prevR
-		while (seen.containsValue(false) && prevR.size() != 0) {
+		while (seen.containsValue(false) && prevRhelp(prevR, seen)) {
 			
 			//initialize two empty HashSets to store new values from bVisit algorithm 
 			kBset = new HashSet<hyperNode>(); 
@@ -152,6 +151,13 @@ public class hyperAlgorithms {
 		//return the dictionary of distances to reach each node from the source set 
 		return dist; 
 	
+	}
+	
+	public static boolean prevRhelp(HashSet<hyperEdge> rSet, Hashtable<hyperEdge, Boolean> seen) {
+		for (hyperEdge e : rSet) {
+			if(seen.get(e) == false)
+				return true; 
+		}return false; 
 	}
 }
 	

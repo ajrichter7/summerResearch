@@ -56,13 +56,16 @@ public class hyperEdge {
 	//method to print out specific hyperEdge that method is called on 
 	public void printHyperEdge() {
 		System.out.println(this);
-		System.out.println("Tail : ");
+		HashSet<String> tail = new HashSet<String>(); 
 		for (hyperNode i : this.tail) {
-			System.out.println(i.getId());
+			tail.add(i.getId());
 		}
-		System.out.println("Head : ");
+		System.out.println("Tail : " + tail);
+		
+		HashSet<String> head = new HashSet<String>(); 
 		for(hyperNode i : this.head) {
-			System.out.println(i.getId());
+			head.add(i.getId());
+		System.out.println("Head : " + head);
 		}
 	}
 

@@ -288,17 +288,28 @@ public class hyperGraph {
 		
 		HashSet<hyperNode> n = new HashSet<hyperNode>(); 
 		
+		System.out.println("bVisit run on source set -----------------");
+		System.out.println();
 		for (int i = 0 ; i <2; i ++) {
 			hyperNode j = graph.nodes.get(i); 
 			n.add(j); 
 		}
 		
+		HashSet<String> sourceSet = new HashSet<String>(); 
+		for (hyperNode node : n) {
+			sourceSet.add(node.getId());
+		}
+		System.out.println("n is the source set containing : " + sourceSet);
+		System.out.println();
+		
 		bObject x = hyperAlgorithms.bVisit(graph, n); 
 		
-		System.out.println("B Set: ");
+	
+		HashSet<String> B = new HashSet<String>(); 
 		for (hyperNode i : x.getBset()) {
-			System.out.println(i.getId());
+			B.add(i.getId());
 		}
+		System.out.println("B Set: " + B);
 		System.out.println();
 		System.out.println("X Set: ");
 		for(hyperEdge e : x.getXset()) {
@@ -321,8 +332,13 @@ public class hyperGraph {
 			sorted.add(nee.getId());
 		}
 		for (String s : sorted) {
+			if (dist.get(graph.gethyperNode(s)) == Integer.MAX_VALUE) {
+				System.out.println("Node " + s + " : INFINITY"); 
+			} else {
 			System.out.println("Node " + s + " : " + dist.get(graph.gethyperNode(s)));
+			}
 		}
+		
 		
 	}
 	
