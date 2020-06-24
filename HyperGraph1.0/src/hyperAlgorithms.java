@@ -38,18 +38,14 @@ public class hyperAlgorithms {
 				count.put(i, count.get(i) + 1);
 				//if the number of times an edge is seen is equal to the tail size of the edge do
 				if (count.get(i) == i.tailSize()){
-					HashSet<hyperNode> h = new HashSet<hyperNode>(); 
-					for (hyperNode nodeinHead : i.getHead()) {
-						h.add(nodeinHead); 
-					}
 					//add nodes in head to Q if not contained in B 
-					for (hyperNode nodeinHead : h) {
+					for (hyperNode nodeinHead : i.getHead()) {
 						if(!B.contains(nodeinHead)) {
 							Q.add(nodeinHead);
 						}
 					}
 					//add all nodes in head to B 
-					B.addAll(h); 
+					B.addAll(i.getHead()); 
 					//add i to set of traversed hyperEdges 
 					X.add(i);
 				}
@@ -82,25 +78,25 @@ public class hyperAlgorithms {
 		
 		//dist[n] = 0 if n is contained in B0 else infinity for all n contained in the hyperGraph
 		for (hyperNode n : graph.nodes) {
-			if (results.getBset().contains(n)) {
+			if (results.getBset().contains(n)) 
 				dist.put(n, 0);
-			}
-			else {
+			else 
 				dist.put(n, myInf);
-			}
+			
 		}
 		
 		//new dictionary for whether or not a hyperEdge has been seen 
 		Hashtable<hyperEdge, Boolean> seen = new Hashtable<hyperEdge, Boolean>(); 
 		
+		//TODO: consider a hashset<hyperEdge>
+		
 		//seen[e] = true if e is contained in X0 otherwise initialized to false 
 		for (hyperEdge e : graph.edges) {
-			if (results.getXset().contains(e)) {
+			if (results.getXset().contains(e)) 
 				seen.put(e, true);
-			}
-			else {
+			else 
 				seen.put(e, false); 
-			}
+			
 		}
 		
 		//initialize k to 1 
@@ -112,7 +108,8 @@ public class hyperAlgorithms {
 		HashSet<hyperEdge> kRset = new HashSet<hyperEdge>(); 
 		
 		//while there exists an edge that we have not seen do 
-		while (seen.containsValue(false)) {
+		//TODO: make a separate function for while loop to include prevR
+		while (seen.containsValue(false) && prevR.size() != 0) {
 			
 			//initialize two empty HashSets to store new values from bVisit algorithm 
 			kBset = new HashSet<hyperNode>(); 
@@ -149,8 +146,7 @@ public class hyperAlgorithms {
 			k = k + 1; 
 			
 			//update prevR such that it is now the restricted set from the last call to bVisit 
-			prevR = new HashSet<hyperEdge>(); 
-			prevR.addAll(kRset);
+			prevR = new HashSet<hyperEdge>(kRset); 
 		}
 		
 		//return the dictionary of distances to reach each node from the source set 

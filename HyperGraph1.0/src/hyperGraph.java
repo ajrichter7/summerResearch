@@ -20,6 +20,15 @@ public class hyperGraph {
 		return edges; 
 	}
 	
+	// method used to get the hyperNode object if ID in a subset of nodes 
+	public hyperNode gethyperNode(String s) {
+		for (hyperNode n : nodes) {
+			if (n.getId() == s)
+				return n; 
+			}
+		return null; 
+	}
+	
 	//method to print out the ID (or string associated with) each node in the hyperGraph
 	public void printNodes() {
 		for (hyperNode i : nodes) {
@@ -261,21 +270,21 @@ public class hyperGraph {
 		hyperGraph graph = new hyperGraph(); 
 		graph.buildhyperGraph(); 
 		
-		graph.printIncomingEdges("D");
-		
-		HashSet<hyperEdge> in = graph.getIncomingEdges("D");
-		System.out.println("graph.getIncomingEdges() function output: " + in);
-		System.out.println();
-		
-		graph.printOutgoingEdges("A"); 
-		
-		HashSet<hyperEdge> out = graph.getOutgoingEdges("A");
-		System.out.println("graph.getOutgoingEdges() function output: " + out);
-		System.out.println();
-		
-		graph.printEdges(); 
-		graph.printhyperEdgeObjects(); 
-		graph.printNodes();
+//		graph.printIncomingEdges("D");
+//		
+//		HashSet<hyperEdge> in = graph.getIncomingEdges("D");
+//		System.out.println("graph.getIncomingEdges() function output: " + in);
+//		System.out.println();
+//		
+//		graph.printOutgoingEdges("A"); 
+//		
+//		HashSet<hyperEdge> out = graph.getOutgoingEdges("A");
+//		System.out.println("graph.getOutgoingEdges() function output: " + out);
+//		System.out.println();
+//		
+//		graph.printEdges(); 
+//		graph.printhyperEdgeObjects(); 
+//		graph.printNodes();
 		
 		HashSet<hyperNode> n = new HashSet<hyperNode>(); 
 		
@@ -307,8 +316,12 @@ public class hyperGraph {
 		Hashtable<hyperNode, Integer>dist = hyperAlgorithms.bRelaxation(graph,n);
 		
 		Set<hyperNode> nodes = dist.keySet();
+		TreeSet<String> sorted = new TreeSet<String>(); 
 		for (hyperNode nee : nodes) {
-			System.out.println(nee.getId() + " : " + dist.get(nee));
+			sorted.add(nee.getId());
+		}
+		for (String s : sorted) {
+			System.out.println("Node " + s + " : " + dist.get(graph.gethyperNode(s)));
 		}
 		
 	}
