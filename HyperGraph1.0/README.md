@@ -1,5 +1,5 @@
 # summerResearch
-## Implementation of hypergraph topology and hypergraph traversal algorithm (with relaxation) 
+## Implementation of hypergraph topology and hypergraph traversal algorithms (with relaxation) 
 
 The algorithms presented here are outlined in depth in Franzese N, Groce A, Murali TM, Ritz A (2019) Hypergraph-based connectivity measures for signaling pathway topologies. PLOS Computational Biology 15(10): e1007384. https://doi.org/10.1371/journal.pcbi.1007384. 
 
