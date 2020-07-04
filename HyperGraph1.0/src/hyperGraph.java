@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class hyperGraph {
@@ -43,15 +44,20 @@ public class hyperGraph {
 	//hyperEdge@memorylocation
 	//Tail : list of hyperNodes in the tail (will return string associated with each node) 
 	//Head : list of hyperNodes in the head (will return string associated with each node) 
+	
 	public void printEdges() {
 		for (hyperEdge i : edges) {
 			System.out.println(i);
+			HashSet<String> tail = new HashSet<String>();
+			HashSet<String> head = new HashSet<String>();
 			for (hyperNode j : i.getTail()) {
-				System.out.println("Tail: " + j.getId());
+				tail.add(j.getId());
 			}
 			for (hyperNode j : i.getHead()) {
-				System.out.println("Head: " + j.getId());
+				head.add(j.getId()); 
 			}
+			System.out.println("Tail : " + tail);
+			System.out.println("Head : " + head);
 			System.out.println();
 		}
 	}
@@ -246,6 +252,13 @@ public class hyperGraph {
 			nodes.add(node);
 		}
 	}
+	//method to add a hyperNode object to a hyperGraph with attributes
+	public void addhyperNode(String Id, String[] attributes) {
+		hyperNode node = new hyperNode(Id, attributes); 
+		if(!nodes.contains(node)) {
+			nodes.add(node);
+		}
+	}
 	
 	//method to add new hyperEdge object to a hyperGraph 
 	public void addhyperEdge(HashSet<hyperNode> tail, HashSet<hyperNode> head){
@@ -263,83 +276,6 @@ public class hyperGraph {
 				nodes.add(i);
 			}
 		}
-	}
-
-	//main method 
-	public static void main(String[] args) {
-		hyperGraph graph = new hyperGraph(); 
-		graph.buildhyperGraph(); 
-		
-//		graph.printIncomingEdges("D");
-//		
-//		HashSet<hyperEdge> in = graph.getIncomingEdges("D");
-//		System.out.println("graph.getIncomingEdges() function output: " + in);
-//		System.out.println();
-//		
-//		graph.printOutgoingEdges("A"); 
-//		
-//		HashSet<hyperEdge> out = graph.getOutgoingEdges("A");
-//		System.out.println("graph.getOutgoingEdges() function output: " + out);
-//		System.out.println();
-//		
-//		graph.printEdges(); 
-//		graph.printhyperEdgeObjects(); 
-//		graph.printNodes();
-		
-		HashSet<hyperNode> n = new HashSet<hyperNode>(); 
-		
-		System.out.println("bVisit run on source set -----------------");
-		System.out.println();
-		for (int i = 0 ; i <2; i ++) {
-			hyperNode j = graph.nodes.get(i); 
-			n.add(j); 
-		}
-		
-		HashSet<String> sourceSet = new HashSet<String>(); 
-		for (hyperNode node : n) {
-			sourceSet.add(node.getId());
-		}
-		System.out.println("n is the source set containing : " + sourceSet);
-		System.out.println();
-		
-		bObject x = hyperAlgorithms.bVisit(graph, n); 
-		
-	
-		HashSet<String> B = new HashSet<String>(); 
-		for (hyperNode i : x.getBset()) {
-			B.add(i.getId());
-		}
-		System.out.println("B Set: " + B);
-		System.out.println();
-		System.out.println("X Set: ");
-		for(hyperEdge e : x.getXset()) {
-			e.printHyperEdge();
-		}
-		System.out.println();
-		System.out.println("R Set: ");
-		for(hyperEdge e: x.getRset()) {
-			e.printHyperEdge();
-		}
-		
-		System.out.println();
-		System.out.println("bRelaxation distances ------------------");
-		System.out.println();
-		Hashtable<hyperNode, Integer>dist = hyperAlgorithms.bRelaxation(graph,n);
-		
-		Set<hyperNode> nodes = dist.keySet();
-		TreeSet<String> sorted = new TreeSet<String>(); 
-		for (hyperNode nee : nodes) {
-			sorted.add(nee.getId());
-		}
-		for (String s : sorted) {
-			if (dist.get(graph.gethyperNode(s)) == Integer.MAX_VALUE) {
-				System.out.println("Node " + s + " : INFINITY"); 
-			} else {
-			System.out.println("Node " + s + " : " + dist.get(graph.gethyperNode(s)));
-			}
-		}
-		
-		
 	}
 	
 }

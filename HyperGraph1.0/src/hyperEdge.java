@@ -43,6 +43,16 @@ public class hyperEdge {
 		this.head.add(node); 
 	}
 	
+	//method to remove a hyperNode from the tail
+	public void removeFromTail(hyperNode node) {
+		this.tail.remove(node); 
+	}
+	
+	//method to remove a hyperNode from the head 
+	public void removeFromHead(hyperNode node) {
+		this.head.remove(node); 
+	}
+	
 	//method to return the size of the tail set 
 	public int tailSize() {
 		return this.tail.size(); 
