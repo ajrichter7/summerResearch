@@ -8,6 +8,7 @@ public class hyperNode {
 		this.attributes = attr; 
 	}
 	
+	//overwriting the constructor if there is not string[] of attributes 
 	public hyperNode(String Id) { 
 		this(Id, null);
 	}
@@ -17,6 +18,7 @@ public class hyperNode {
 		return Id; 
 	}
 	
+	//method to access the string list of attributes associated with a node if applicable 
 	public String[] getAttributes() {
 		return attributes; 
 	}
