@@ -1,18 +1,24 @@
-import java.util.ArrayList;
-
 public class hyperNode {
 	String Id; 
-	ArrayList<String> attributes; 
+	String[] attributes; 
 	
 	//constructor for hyperNode 
-	public hyperNode(String Id) {
+	public hyperNode(String Id, String[] attr) {
 		this.Id = Id;
-		attributes = new ArrayList<String>(); 
+		this.attributes = attr; 
+	}
+	
+	public hyperNode(String Id) { 
+		this(Id, null);
 	}
 	
 	//method to get the unique String Id associated with each hyperNode 
 	public String getId() {
 		return Id; 
+	}
+	
+	public String[] getAttributes() {
+		return attributes; 
 	}
 	
 }
