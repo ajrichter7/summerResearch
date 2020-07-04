@@ -8,3 +8,5 @@ To find the Python implementation of the same algorithms see: https://github.com
 ### Requirements for running code: 
 1. Java SE 14 
 
+### How to run code: 
+Make sure that the txt files are placed in the same location as the main function or you will have a FileNotFound error. The main function to run all of the tests is located in main.java
