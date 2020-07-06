@@ -153,6 +153,7 @@ public class hyperAlgorithms {
 	
 	}
 	
+	//helper method for the while loop presented in BRelaxation
 	public static boolean prevRhelp(HashSet<hyperEdge> rSet, Hashtable<hyperEdge, Boolean> seen) {
 		for (hyperEdge e : rSet) {
 			if(seen.get(e) == false)
