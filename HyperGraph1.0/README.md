@@ -9,7 +9,7 @@ To find the Python implementation of the same algorithms see: https://github.com
 1. Java SE 14 
 
 ### How to run code: 
-Make sure that the txt files are placed in the same location as the main function or you will have a FileNotFound error. The main function to run all of the tests is located in main.java
+Make sure that the txt files are placed in the same location as the main function or you will have a FileNotFound error. The main function to run all of the tests is located in main.java. If the data is not placed in the same folder, then you will need to specify the path to get to the txt files. 
 
 ### Understanding the algorithm: 
 The best way to grasp the algorithms in hyperAlgorithms.java is to read the aforementioned paper. Attached are some generally helpful images. Both of the images included come from the paper. Figure 8 displays the hypergraph that is constructed in the buildhypergraph function located in hyperGraph.java. Figure 9 helps to understand how the algorithm will work on this simple hypergraph. 
