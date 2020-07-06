@@ -44,7 +44,6 @@ public class hyperGraph {
 	//hyperEdge@memorylocation
 	//Tail : list of hyperNodes in the tail (will return string associated with each node) 
 	//Head : list of hyperNodes in the head (will return string associated with each node) 
-	
 	public void printEdges() {
 		for (hyperEdge i : edges) {
 			System.out.println(i);

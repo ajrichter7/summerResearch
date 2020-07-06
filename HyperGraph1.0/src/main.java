@@ -219,8 +219,15 @@ public class main {
 			}
 		}
 		
-		hyperGraph graph2 = makehyperGraph("reactome"); 
-		graph2.printEdges();
+		System.out.println();
+		System.out.println("Results for small_molecule_filter hypergraph construction: ");
+		System.out.println("___________________________________________________________");
+		makehyperGraph("small_molecule_filter"); 
+		
+		System.out.println();
+		System.out.println("Results for reactome hypergraph construction: ");
+		System.out.println("______________________________________________");
+		makehyperGraph("reactome"); 
 
 	}
 
