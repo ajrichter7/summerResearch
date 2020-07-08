@@ -1,29 +1,29 @@
 import java.io.*;
 import java.util.*;
 
-public class hyperGraph {
-	public ArrayList<hyperNode>nodes; 
-	public ArrayList<hyperEdge>edges; 
+public class HyperGraph {
+	public ArrayList<HyperNode>nodes; 
+	public ArrayList<HyperEdge>edges; 
 	
 	//constructor 
-	public hyperGraph() {
-		nodes = new ArrayList<hyperNode>();
-		edges = new ArrayList<hyperEdge>(); 
+	public HyperGraph() {
+		nodes = new ArrayList<HyperNode>();
+		edges = new ArrayList<HyperEdge>(); 
 	}
 	
 	//method to get the list of hyperNodes in the hyperGraph
-	public ArrayList<hyperNode> getNodes(){
+	public ArrayList<HyperNode> getNodes(){
 		return nodes; 
 	}
 	
 	//method to get the list of hyperEdges in the hyperGraph
-	public ArrayList<hyperEdge> getEdges(){
+	public ArrayList<HyperEdge> getEdges(){
 		return edges; 
 	}
 	
 	// method used to get the hyperNode object if ID in a subset of nodes 
-	public hyperNode gethyperNode(String s) {
-		for (hyperNode n : nodes) {
+	public HyperNode gethyperNode(String s) {
+		for (HyperNode n : nodes) {
 			if (n.getId() == s)
 				return n; 
 			}
@@ -32,7 +32,7 @@ public class hyperGraph {
 	
 	//method to print out the ID (or string associated with) each node in the hyperGraph
 	public void printNodes() {
-		for (hyperNode i : nodes) {
+		for (HyperNode i : nodes) {
 			System.out.println(i.getId());
 		}
 		System.out.println();
@@ -45,14 +45,14 @@ public class hyperGraph {
 	//Tail : list of hyperNodes in the tail (will return string associated with each node) 
 	//Head : list of hyperNodes in the head (will return string associated with each node) 
 	public void printEdges() {
-		for (hyperEdge i : edges) {
+		for (HyperEdge i : edges) {
 			System.out.println(i);
 			HashSet<String> tail = new HashSet<String>();
 			HashSet<String> head = new HashSet<String>();
-			for (hyperNode j : i.getTail()) {
+			for (HyperNode j : i.getTail()) {
 				tail.add(j.getId());
 			}
-			for (hyperNode j : i.getHead()) {
+			for (HyperNode j : i.getHead()) {
 				head.add(j.getId()); 
 			}
 			System.out.println("Tail : " + tail);
@@ -84,8 +84,8 @@ public class hyperGraph {
 		System.out.println("hyperEdges with hyperNode " + nodeID + " in the tail.");
 		int count = 0; 
 		for (int i = 0 ; i < edges.size(); i ++) {
-			hyperEdge e = edges.get(i);
-			for (hyperNode j : e.getTail()) {
+			HyperEdge e = edges.get(i);
+			for (HyperNode j : e.getTail()) {
 				if (j.getId() == nodeID) {
 					System.out.println("Edge: " + e + " (or edge number " + i + ") contains hyperNode " + nodeID);
 					count ++; 
@@ -98,11 +98,11 @@ public class hyperGraph {
 	}
 	
 	//method to return all of the edges that contain hyperNode X in the tail as a HashSet<hyperEdge> 
-	public HashSet<hyperEdge> getOutgoingEdges(String nodeID){
-		HashSet<hyperEdge> outEdges = new HashSet<hyperEdge>();
+	public HashSet<HyperEdge> getOutgoingEdges(String nodeID){
+		HashSet<HyperEdge> outEdges = new HashSet<HyperEdge>();
 		for (int i = 0 ; i < edges.size(); i ++) {
-			hyperEdge e = edges.get(i);
-			for (hyperNode j : e.getTail()) {
+			HyperEdge e = edges.get(i);
+			for (HyperNode j : e.getTail()) {
 				if (j.getId() == nodeID) {
 					outEdges.add(e);
 				}
@@ -123,8 +123,8 @@ public class hyperGraph {
 		System.out.println("hyperEdges with hyperNode " + nodeID + " in the head.");
 		int count = 0; 
 		for (int i = 0 ; i < edges.size(); i ++) {
-			hyperEdge e = edges.get(i);
-			for (hyperNode j : e.getHead()) {
+			HyperEdge e = edges.get(i);
+			for (HyperNode j : e.getHead()) {
 				if (j.getId() == nodeID) {
 					System.out.println("Edge: " + e + " (or edge number " + i + ") contains hyperNode " + nodeID);
 					count ++; 
@@ -137,11 +137,11 @@ public class hyperGraph {
 	}
 	
 	//method to return all of the edges that contain hyperNode X in the head as a HashSet<hyperEdge> 
-	public HashSet<hyperEdge> getIncomingEdges(String nodeID){
-		HashSet<hyperEdge> inEdges = new HashSet<hyperEdge>();
+	public HashSet<HyperEdge> getIncomingEdges(String nodeID){
+		HashSet<HyperEdge> inEdges = new HashSet<HyperEdge>();
 		for (int i = 0 ; i < edges.size(); i ++) {
-			hyperEdge e = edges.get(i);
-			for (hyperNode j : e.getHead()) {
+			HyperEdge e = edges.get(i);
+			for (HyperNode j : e.getHead()) {
 				if (j.getId() == nodeID) {
 					inEdges.add(e);
 				}
@@ -149,128 +149,35 @@ public class hyperGraph {
 		}
 		return inEdges; 		
 	}
-	
-	//method to build the hyperGraph outlined in Figure 8.
-	public void buildhyperGraph() {
-		List<String> ls = List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R");
-		for (String i : ls) {
-			addhyperNode(i);  
-		}
-		
-		HashSet<hyperNode> tail = new HashSet<hyperNode>(); 
-		HashSet<hyperNode> head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(0));
-		head.add(nodes.get(2));
-		addhyperEdge(tail, head); 
-		
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(0));
-		tail.add(nodes.get(1));
-		head.add(nodes.get(3));
-		addhyperEdge(tail, head); 
 
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(1));
-		head.add(nodes.get(4));
-		addhyperEdge(tail, head); 
-
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(1));
-		head.add(nodes.get(5));
-		addhyperEdge(tail, head); 
-
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(4));
-		tail.add(nodes.get(5));
-		head.add(nodes.get(8));
-		addhyperEdge(tail, head); 
-
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(3));
-		tail.add(nodes.get(6));
-		head.add(nodes.get(11));
-		addhyperEdge(tail, head);  
-
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(3));
-		tail.add(nodes.get(7));
-		head.add(nodes.get(12));
-		addhyperEdge(tail, head); 
-
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(8));
-		tail.add(nodes.get(13));
-		head.add(nodes.get(14));
-		addhyperEdge(tail, head); 
-
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(12));
-		tail.add(nodes.get(13));
-		head.add(nodes.get(16));
-		addhyperEdge(tail, head); 
-
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(11));
-		tail.add(nodes.get(9));
-		tail.add(nodes.get(10));
-		head.add(nodes.get(15));
-		addhyperEdge(tail, head); 
-		
-		tail = new HashSet<hyperNode>(); 
-		head = new HashSet<hyperNode>();
-		
-		tail.add(nodes.get(15));
-		tail.add(nodes.get(16));
-		head.add(nodes.get(17));
-		addhyperEdge(tail, head); 
-	}
 	
 	//method to add a hyperNode object to a hyperGraph 
 	public void addhyperNode(String Id) {
-		hyperNode node = new hyperNode(Id); 
+		HyperNode node = new HyperNode(Id); 
 		if(!nodes.contains(node)) {
 			nodes.add(node);
 		}
 	}
 	//method to add a hyperNode object to a hyperGraph with attributes
-	public void addhyperNode(String Id, String[] attributes) {
-		hyperNode node = new hyperNode(Id, attributes); 
+	public void addhyperNode(String Id, Map<String, String> attributes) {
+		HyperNode node = new HyperNode(Id, attributes); 
 		if(!nodes.contains(node)) {
 			nodes.add(node);
 		}
 	}
 	
 	//method to add new hyperEdge object to a hyperGraph 
-	public void addhyperEdge(HashSet<hyperNode> tail, HashSet<hyperNode> head){
-		hyperEdge edge = new hyperEdge();
+	public void addhyperEdge(HashSet<HyperNode> tail, HashSet<HyperNode> head){
+		HyperEdge edge = new HyperEdge();
 		edge.setHead(head);
 		edge.setTail(tail);
 		edges.add(edge); 
-		for (hyperNode i : tail) {
+		for (HyperNode i : tail) {
 			if (!nodes.contains(i)) {
 				nodes.add(i);
 			}
 		}
-		for (hyperNode i : head) {
+		for (HyperNode i : head) {
 			if (!nodes.contains(i)) {
 				nodes.add(i);
 			}

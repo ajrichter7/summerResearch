@@ -1,47 +1,47 @@
 import java.util.*;
 
-public class bObject {
+public class Bobject {
 	//B is the set of B-connected nodes given a Source set S 
-	protected HashSet<hyperNode> B;
+	protected HashSet<HyperNode> B;
 	//R is the list of restricted hyperEdges (hyperEdges that can be reached but not traversed) 
-	protected HashSet<hyperEdge> R;
+	protected HashSet<HyperEdge> R;
 	//X is the list of traversed hyperEdges 
-	protected HashSet<hyperEdge> X; 
+	protected HashSet<HyperEdge> X; 
 	
 	//constructor for object to return after bVisit
-	public bObject() {
-		HashSet<hyperNode> B = new HashSet<hyperNode>(); 
-		HashSet<hyperEdge> R = new HashSet<hyperEdge>(); 
-		HashSet<hyperEdge> X = new HashSet<hyperEdge>(); 
+	public Bobject() {
+		HashSet<HyperNode> B = new HashSet<HyperNode>(); 
+		HashSet<HyperEdge> R = new HashSet<HyperEdge>(); 
+		HashSet<HyperEdge> X = new HashSet<HyperEdge>(); 
 	}
 	
 	//method to set list of B-connected nodes
-	public void setB(HashSet<hyperNode> b) {
+	public void setB(HashSet<HyperNode> b) {
 		this.B = b; 
 	}
 	
 	//method to set list of hyperEdges reached but not traversed (restricted) 
-	public void setR(HashSet<hyperEdge> r) {
+	public void setR(HashSet<HyperEdge> r) {
 		this.R = r; 
 	}
 	
 	//method to set list of traversed hyperEdges 
-	public void setX(HashSet<hyperEdge> x) {
+	public void setX(HashSet<HyperEdge> x) {
 		this.X = x; 
 	}
 	
 	//method to return list of B-connected nodes 
-	public HashSet<hyperNode> getBset(){
+	public HashSet<HyperNode> getBset(){
 		return this.B; 
 	}
 	
 	//method to return list of restricted hyperEdges 
-	public HashSet<hyperEdge> getRset(){
+	public HashSet<HyperEdge> getRset(){
 		return this.R; 
 	}
 	
 	//method to return list of traversed hyperEdges
-	public HashSet<hyperEdge> getXset(){
+	public HashSet<HyperEdge> getXset(){
 		return this.X; 
 	}	
 	

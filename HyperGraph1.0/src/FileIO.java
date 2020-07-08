@@ -1,8 +1,8 @@
-import java.util.*;
 import java.io.*; 
+import java.util.*; 
 
-public class main {
-	public static hyperGraph makehyperGraph(String fileName) throws FileNotFoundException {
+public class FileIO {
+	public static HyperGraph makehyperGraph(String fileName) throws FileNotFoundException {
 		Hashtable<String, String[]> hyperNodes = new Hashtable<String, String[]>(); 
 		String delim = ";"; 
 		String sep = "\t"; 
@@ -31,17 +31,22 @@ public class main {
 		}
 		
 		//Construct a new instance of a hyperGraph 
-		hyperGraph graph = new hyperGraph(); 
+		HyperGraph graph = new HyperGraph(); 
 		nodeScanner.close();
 		
 		Set<String> keys = hyperNodes.keySet();
+		Map<String, String> map = new HashMap<String, String>();
 		
 		//Adding hyperNodes to the graph 
 		String none = "None";
 		for(String k : keys) {
 			if (!k.equals(none)) {
 				if(hyperNodes.get(k) != null) {
-					graph.addhyperNode(k, hyperNodes.get(k));
+					map = new HashMap<>();
+					for (String s : hyperNodes.get(k)) {
+						map.put(k, s);
+					}
+					graph.addhyperNode(k, map);
 				}
 				else {
 					graph.addhyperNode(k); 
@@ -95,14 +100,14 @@ public class main {
 			}
 			else {
 				//Creating the tail set of a hyperEdge 
-				HashSet<hyperNode> tailSet = new HashSet<hyperNode>(); 
+				HashSet<HyperNode> tailSet = new HashSet<HyperNode>(); 
 				for (String s : tail) {
 					if (!s.equals(none)) {
 						if(graph.gethyperNode(s) != null) {
 							tailSet.add(graph.gethyperNode(s));
 						}
 						else {
-							hyperNode node = new hyperNode(s); 
+							HyperNode node = new HyperNode(s); 
 							if(!graph.nodes.contains(node)) {
 								graph.nodes.add(node);
 							}
@@ -111,14 +116,14 @@ public class main {
 					}
 				}
 				//Creating the head set of a hyperEdge 
-				HashSet<hyperNode> headSet = new HashSet<hyperNode>(); 
+				HashSet<HyperNode> headSet = new HashSet<HyperNode>(); 
 				for (String s : head) {
 					if (!s.equals(none)) {
 						if(graph.gethyperNode(s) != null) {
 							headSet.add(graph.gethyperNode(s));
 						}
 						else {
-							hyperNode node = new hyperNode(s); 
+							HyperNode node = new HyperNode(s); 
 							if(!graph.nodes.contains(node)) {
 								graph.nodes.add(node);
 							}
@@ -140,95 +145,97 @@ public class main {
 		return graph; 
 	}
 	
+	//method to build the hyperGraph outlined in Figure 8.
+	public static void buildToyHyperGraph(HyperGraph graph) {
+		List<String> ls = List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R");
+		for (String i : ls) {
+			graph.addhyperNode(i);  
+		}
+		
+		HashSet<HyperNode> tail = new HashSet<HyperNode>(); 
+		HashSet<HyperNode> head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(0));
+		head.add(graph.nodes.get(2));
+		graph.addhyperEdge(tail, head); 
+		
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(0));
+		tail.add(graph.nodes.get(1));
+		head.add(graph.nodes.get(3));
+		graph.addhyperEdge(tail, head); 
 
-	public static void main(String[] args) throws FileNotFoundException {
-		// Below are some tests that I have conducted to demonstrate the methods and algorithms outlined, 
-		// feel free to comment out the ones that are not relevant to what you need. 
-		hyperGraph graph = new hyperGraph(); 
-		graph.buildhyperGraph(); 
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
 		
-		graph.printIncomingEdges("D");
-		
-		HashSet<hyperEdge> in = graph.getIncomingEdges("D");
-		System.out.println("graph.getIncomingEdges() function output: " + in);
-		System.out.println();
-		
-		graph.printOutgoingEdges("A"); 
-		
-		HashSet<hyperEdge> out = graph.getOutgoingEdges("A");
-		System.out.println("graph.getOutgoingEdges() function output for 'A' : " + out);
-		System.out.println();
-		
-		graph.printEdges(); 
-		graph.printhyperEdgeObjects(); 
-		graph.printNodes();
-		
-		HashSet<hyperNode> n = new HashSet<hyperNode>(); 
-		
-		System.out.println("bVisit run on source set -----------------");
-		System.out.println();
-		for (int i = 0 ; i <2; i ++) {
-			hyperNode j = graph.nodes.get(i); 
-			n.add(j); 
-		}
-		
-		HashSet<String> sourceSet = new HashSet<String>(); 
-		for (hyperNode node : n) {
-			sourceSet.add(node.getId());
-		}
-		System.out.println("n is the source set containing : " + sourceSet);
-		System.out.println();
-		
-		bObject x = hyperAlgorithms.bVisit(graph, n); 
-		
-	
-		HashSet<String> B = new HashSet<String>(); 
-		for (hyperNode i : x.getBset()) {
-			B.add(i.getId());
-		}
-		System.out.println("B Set (nodes that are B-connected): " + B);
-		System.out.println(); System.out.println();
-		System.out.println("X Set (edges that have been traversed): ");
-		System.out.println("________________________________________");
-		for(hyperEdge e : x.getXset()) {
-			e.printHyperEdge();
-		}
-		System.out.println();System.out.println();
-		System.out.println("R Set (edges reached but not traversed): ");
-		System.out.println("_________________________________________");
-		for(hyperEdge e: x.getRset()) {
-			e.printHyperEdge();
-		}
-		
-		System.out.println();
-		System.out.println("bRelaxation distances");
-		System.out.println("_____________________");
+		tail.add(graph.nodes.get(1));
+		head.add(graph.nodes.get(4));
+		graph.addhyperEdge(tail, head); 
 
-		Hashtable<hyperNode, Integer>dist = hyperAlgorithms.bRelaxation(graph,n);
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
 		
-		Set<hyperNode> nodes = dist.keySet();
-		TreeSet<String> sorted = new TreeSet<String>(); 
-		for (hyperNode nee : nodes) {
-			sorted.add(nee.getId());
-		}
-		for (String s : sorted) {
-			if (dist.get(graph.gethyperNode(s)) == Integer.MAX_VALUE) {
-				System.out.println("Node " + s + " : INFINITY"); 
-			} else {
-			System.out.println("Node " + s + " : " + dist.get(graph.gethyperNode(s)));
-			}
-		}
-		
-		System.out.println();
-		System.out.println("Results for small_molecule_filter hypergraph construction: ");
-		System.out.println("___________________________________________________________");
-		makehyperGraph("small_molecule_filter"); 
-		
-		System.out.println();
-		System.out.println("Results for reactome hypergraph construction: ");
-		System.out.println("______________________________________________");
-		makehyperGraph("reactome"); 
+		tail.add(graph.nodes.get(1));
+		head.add(graph.nodes.get(5));
+		graph.addhyperEdge(tail, head); 
 
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(4));
+		tail.add(graph.nodes.get(5));
+		head.add(graph.nodes.get(8));
+		graph.addhyperEdge(tail, head); 
+
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(3));
+		tail.add(graph.nodes.get(6));
+		head.add(graph.nodes.get(11));
+		graph.addhyperEdge(tail, head);  
+
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(3));
+		tail.add(graph.nodes.get(7));
+		head.add(graph.nodes.get(12));
+		graph.addhyperEdge(tail, head); 
+
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(8));
+		tail.add(graph.nodes.get(13));
+		head.add(graph.nodes.get(14));
+		graph.addhyperEdge(tail, head); 
+
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(12));
+		tail.add(graph.nodes.get(13));
+		head.add(graph.nodes.get(16));
+		graph.addhyperEdge(tail, head); 
+
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(11));
+		tail.add(graph.nodes.get(9));
+		tail.add(graph.nodes.get(10));
+		head.add(graph.nodes.get(15));
+		graph.addhyperEdge(tail, head); 
+		
+		tail = new HashSet<HyperNode>(); 
+		head = new HashSet<HyperNode>();
+		
+		tail.add(graph.nodes.get(15));
+		tail.add(graph.nodes.get(16));
+		head.add(graph.nodes.get(17));
+		graph.addhyperEdge(tail, head); 
 	}
-
 }

@@ -1,15 +1,17 @@
-public class hyperNode {
+import java.util.*;
+
+public class HyperNode {
 	String Id; 
-	String[] attributes; 
+	Map<String, String> attributes; 
 	
 	//constructor for hyperNode 
-	public hyperNode(String Id, String[] attr) {
+	public HyperNode(String Id, Map<String, String> attr) {
 		this.Id = Id;
 		this.attributes = attr; 
 	}
 	
 	//overwriting the constructor if there is not string[] of attributes 
-	public hyperNode(String Id) { 
+	public HyperNode(String Id) { 
 		this(Id, null);
 	}
 	
@@ -19,8 +21,12 @@ public class hyperNode {
 	}
 	
 	//method to get string list of attributes if applicable for the node 
-	public String[] getAttributes() {
+	public Map<String, String> getAttributes() {
 		return attributes; 
+	}
+	
+	public Set<String> getAttributesValues(){
+		return attributes.keySet();
 	}
 	
 }
