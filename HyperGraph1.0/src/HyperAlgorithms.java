@@ -1,8 +1,34 @@
 import java.util.*; 
 
+/**
+ * 
+ * @author alexrichter
+ * @version 1.0 
+ *
+ */
+
 public class HyperAlgorithms {
 
-	//implementation of algorithm 1 from the paper 
+	/**
+	 * Performs BVisit algorithm that checks to see which nodes in a HyperGraph are B-connected. 
+	 * <p> 
+	 * 
+	 * This algorithm will determine which nodes can be reached from a set of source nodes. In order for 
+	 * the head set of a HyperEdge to be reached, the edge must be able to be traversed (ie. all of the nodes 
+	 * in the tail set must be present in the source set). The nodes that can be reached from a source set are said
+	 * to be B-connected to the source set. 
+	 * <p> 
+	 * Outlined in: Franzese N, Groce A, Murali TM, Ritz A (2019) 
+	 * Hypergraph-based connectivity measures for signaling pathway topologies. 
+	 * PLOS Computational Biology 15(10): e1007384. https://doi.org/10.1371/journal.pcbi.1007384.
+	 * 
+	 * @param graph HyperGraph 
+	 * @param lsofNodes Set of source nodes 
+	 * @return BObject which contains 
+	 * <p> 1. Set of B-connected Nodes 
+	 * <p> 2. Set of traversed HyperEdges 
+	 * <p> 3. Set of restricted HyperEdges (can be reached but not traversed) 
+	 */
 	public static Bobject bVisit(HyperGraph graph, HashSet<HyperNode> lsofNodes) {
 		Bobject results = new Bobject(); 
 
@@ -70,6 +96,23 @@ public class HyperAlgorithms {
 		return results; 
 	}
 
+	/**
+	 * Performs BRelaxation algorithm outlined in paper. 
+	 * 
+	 * This algorithm will run BVisit on a HyperGraph multiple times to determine which 
+	 * nodes are B-Connected by relaxing what B-connectivity implies. It returns a dictionary of 
+	 * k-distance to reach a node in a HyperGraph. k-distance implies the number of times that 
+	 * B-visit has been run in order to reach the node in question. If a node cannot be reached, the 
+	 * distance listed will be the max integer value ie "infinity." 
+	 * <p> 
+	 * Outlined in: Franzese N, Groce A, Murali TM, Ritz A (2019) 
+	 * Hypergraph-based connectivity measures for signaling pathway topologies. 
+	 * PLOS Computational Biology 15(10): e1007384. https://doi.org/10.1371/journal.pcbi.1007384.
+	 * 
+	 * @param graph HyperGraph 
+	 * @param lsofNodes Source set of nodes 
+	 * @return dictionary of distances 
+	 */
 	public static Hashtable<HyperNode, Integer> bRelaxation(HyperGraph graph, HashSet<HyperNode> lsofNodes) {
 		Bobject results = bVisit(graph, lsofNodes);
 		//new dictionary for distances 
@@ -87,8 +130,6 @@ public class HyperAlgorithms {
 		
 		//new dictionary for whether or not a hyperEdge has been seen 
 		Hashtable<HyperEdge, Boolean> seen = new Hashtable<HyperEdge, Boolean>(); 
-		
-		//TODO: consider a hashset<hyperEdge>
 		
 		//seen[e] = true if e is contained in X0 otherwise initialized to false 
 		for (HyperEdge e : graph.edges) {
@@ -153,6 +194,15 @@ public class HyperAlgorithms {
 	
 	}
 	
+	/**
+	 * Checks to see if a HyperEdge has been seen. 
+	 * <p> 
+	 * Helper function for BRelaxation algorithm to ensure that the while loop runs the proper amount of times. 
+	 * If a restricted HyperEdge has not been seen, then it will return true and the while loop will run. 
+	 * @param rSet Set of restricted HyperEdges 
+	 * @param seen Dictionary of whether HyperEdges have been seen already
+	 * @return boolean
+	 */
 	public static boolean prevRhelp(HashSet<HyperEdge> rSet, Hashtable<HyperEdge, Boolean> seen) {
 		for (HyperEdge e : rSet) {
 			if(seen.get(e) == false)

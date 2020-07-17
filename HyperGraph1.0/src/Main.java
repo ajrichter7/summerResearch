@@ -1,6 +1,13 @@
 import java.util.*;
 import java.io.*; 
 
+/**
+ * 
+ * @author alexrichter
+ * @version 1.0 
+ *
+ */
+
 public class Main {
 	
 

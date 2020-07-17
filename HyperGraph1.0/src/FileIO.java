@@ -1,7 +1,25 @@
 import java.io.*; 
 import java.util.*; 
 
+/**
+ * 
+ * @author alexrichter
+ * @version 1.0 
+ *
+ */
+
 public class FileIO {
+	/**
+	 * Makes a HyperGraph from a set of files. 
+	 * <p>
+	 * Needs two files: one for -hypernodes.txt and one ofr -hyperedges.txt. It reads through HyperNode file first 
+	 * and add the nodes to a new HyperGraph object. It then reads through the HyperEdge file setting the tail and head 
+	 * sets for the HyperEdges. The HyperEdges are then added to the graph. After adding the edges and nodes, will 
+	 * print out the number of reactions that were skipped. 
+	 * @param fileName String prefix for two files 
+	 * @return new HyperGraph object 
+	 * @throws FileNotFoundException
+	 */
 	public static HyperGraph makehyperGraph(String fileName) throws FileNotFoundException {
 		Hashtable<String, String[]> hyperNodes = new Hashtable<String, String[]>(); 
 		String delim = ";"; 
@@ -55,7 +73,6 @@ public class FileIO {
 		}
 		
 		//Initialize counters to check to see if reactions needed to be skipped 
-		//TODO: make sure this counter actually works because for Reactome file it returns 0 
 		int skipped1 = 0; 
 		int skipped2 = 0; 
 		
@@ -145,7 +162,16 @@ public class FileIO {
 		return graph; 
 	}
 	
-	//method to build the hyperGraph outlined in Figure 8.
+	/**
+	 * Creates a toy HyperGraph to perform simple tests. 
+	 * <p>
+	 * This creates the HyperGraph outlined in Figure 8 of Franzese N, Groce A, Murali TM, Ritz A (2019) 
+	 * Hypergraph-based connectivity measures for signaling pathway topologies. 
+	 * PLOS Computational Biology 15(10): e1007384. https://doi.org/10.1371/journal.pcbi.1007384.
+	 * This function allows for the user to test how the HyperGraph algorithms work and can compare the outcome 
+	 * to a tangible figure for understanding. The figure is located in the ReadMe of the github. 
+	 * @param graph HyperGraph 
+	 */
 	public static void buildToyHyperGraph(HyperGraph graph) {
 		List<String> ls = List.of("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R");
 		for (String i : ls) {
