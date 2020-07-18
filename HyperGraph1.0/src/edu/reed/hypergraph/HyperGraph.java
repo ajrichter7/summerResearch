@@ -1,3 +1,4 @@
+package edu.reed.hypergraph;
 import java.io.*;
 import java.util.*;
 
