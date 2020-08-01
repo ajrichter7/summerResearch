@@ -1,9 +1,6 @@
 package edu.reed.hypergraph;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
+import java.util.*; 
 
 import org.gk.model.GKInstance;
 import org.gk.model.ReactomeJavaConstants;
@@ -13,7 +10,7 @@ import org.gk.render.Node;
 import org.gk.render.Renderable;
 import org.gk.render.RenderablePathway;
 import org.gk.schema.InvalidAttributeException;
-import org.junit.Test;
+//import org.junit.Test;
 
 /**
  * Construct a HyperGraph from a given pathway diagram.
@@ -159,7 +156,7 @@ public class ReactomeHyperGraphConverter {
         return hyperNode;
     }
 
-    @Test
+//    @Test
     public void testCreateHyperGraph() throws Exception {
         /* Simple test pathway (DBID 211728). Expected output:
 

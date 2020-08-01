@@ -54,4 +54,12 @@ public class HyperNode {
 		return attributes.keySet();
 	}
 	
+	/**
+	 * Sets the map of attributes to a new map. 
+	 * @param attr Map of attributes
+	 */
+	public void setAttributes(Map<String, String> attr) {
+		this.attributes = attr; 
+	}
+	
 }

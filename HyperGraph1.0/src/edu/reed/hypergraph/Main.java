@@ -1,12 +1,5 @@
+package edu.reed.hypergraph;
 import java.util.*;
-
-import edu.reed.hypergraph.Bobject;
-import edu.reed.hypergraph.FileIO;
-import edu.reed.hypergraph.HyperAlgorithms;
-import edu.reed.hypergraph.HyperEdge;
-import edu.reed.hypergraph.HyperGraph;
-import edu.reed.hypergraph.HyperNode;
-
 import java.io.*; 
 
 /**
