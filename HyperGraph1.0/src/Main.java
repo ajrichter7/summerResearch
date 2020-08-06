@@ -32,7 +32,7 @@ public class Main {
 		if (args[0].equals("File")){
 			System.out.println("Results for small_molecule_filter hypergraph construction:");
 			System.out.println("__________________________________________________________");
-			edu.reed.hypergraph.HyperGraph graph2 = edu.reed.hypergraph.FileIO.makehyperGraph("small_molecule_filter"); 
+			edu.reed.hypergraph.HyperGraph graph2 = edu.reed.hypergraph.FileIO.makehyperGraph("data/small_molecule_filter"); 
 			
 			for (edu.reed.hypergraph.HyperNode n : graph2.nodes) {
 				if (!n.getAttributes().equals(null)) {
@@ -42,7 +42,7 @@ public class Main {
 			System.out.println();
 			System.out.println("Results for reactome hypergraph construction:");
 			System.out.println("_____________________________________________");
-			edu.reed.hypergraph.FileIO.makehyperGraph("reactome"); 
+			edu.reed.hypergraph.FileIO.makehyperGraph("data/reactome"); 
 			
 
 		}
