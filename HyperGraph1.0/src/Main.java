@@ -1,4 +1,3 @@
-
 import java.util.*;
 import java.io.*; 
 
@@ -12,7 +11,11 @@ import java.io.*;
 public class Main {
 	
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, Exception {
+		
+		edu.reed.hypergraph.ReactomeHyperGraphConverter test = new edu.reed.hypergraph.ReactomeHyperGraphConverter(); 
+		
+		test.testCreateHyperGraph(); 
 		// Below are some tests that I have conducted to demonstrate the methods and algorithms outlined, 
 		// feel free to comment out the ones that are not relevant to what you need. 
 		edu.reed.hypergraph.HyperGraph graph = new edu.reed.hypergraph.HyperGraph(); 
