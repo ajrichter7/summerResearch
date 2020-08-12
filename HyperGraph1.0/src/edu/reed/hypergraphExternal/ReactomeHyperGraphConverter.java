@@ -1,5 +1,7 @@
-package edu.reed.hypergraph;
+package edu.reed.hypergraphExternal;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*; 
 
 import org.gk.model.GKInstance;
@@ -10,7 +12,11 @@ import org.gk.render.Node;
 import org.gk.render.Renderable;
 import org.gk.render.RenderablePathway;
 import org.gk.schema.InvalidAttributeException;
-//import org.junit.Test;
+import org.junit.Test;
+
+import edu.reed.hypergraph.HyperEdge;
+import edu.reed.hypergraph.HyperGraph;
+import edu.reed.hypergraph.HyperNode;
 
 /**
  * Construct a HyperGraph from a given pathway diagram.
@@ -156,27 +162,24 @@ public class ReactomeHyperGraphConverter {
         return hyperNode;
     }
 
-//    @Test
+    private Properties loadProperties(String filename) throws IOException {
+        Properties properties = new Properties();
+        try (FileInputStream fis = new FileInputStream(filename)) {
+            properties.load(fis);
+        }
+        return properties;
+    }
+
+    @Test
     public void testCreateHyperGraph() throws Exception {
-        /* Simple test pathway (DBID 211728). Expected output:
-
-           Edges:
-           edu.reed.HyperEdge@123f1134
-           Tail : [PAK-2p34:RHG10 complex]
-           Head : [perinuclear PAK-2p34:RHG10 complex]
-
-           edu.reed.HyperEdge@7d68ef40
-           Tail : [ARHGAP10, p-T402-PAK2(213-524)]
-           Head : [PAK-2p34:RHG10 complex]
-
-           Nodes:
-
-         */
         Long diagramDbId = 5675705L;
-        MySQLAdaptor dba = new MySQLAdaptor("localhost",
-                                            "central",
-                                            "liam",
-                                            ")8J7m]!%[<");
+        Properties properties = loadProperties("resources/converter.prop");
+        String host = properties.getProperty("host");
+        String name = properties.getProperty("name");
+        String user = properties.getProperty("user");
+        String pass = properties.getProperty("pass");
+        MySQLAdaptor dba = new MySQLAdaptor(host, name, user, pass);
+
         GKInstance diagram = dba.fetchInstance(diagramDbId);
         HyperGraph graph = createHyperGraph(diagram);
         System.out.println("Edges:");
